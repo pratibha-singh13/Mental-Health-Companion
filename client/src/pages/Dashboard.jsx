@@ -1,8 +1,6 @@
 import Navbar from '../components/Navbar';
 import MoodForm from '../components/MoodForm';
 import MoodList from '../components/MoodList';
-import MoodChart from '../components/MoodChart';
-import StreakTracker from '../components/StreakTracker'; // ✅ Add this
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import DashboardHero from '../assets/dashboard-hero.png';
@@ -46,16 +44,6 @@ export default function Dashboard() {
 
                 {/* Mood Form */}
                 <MoodForm onMoodAdded={fetchMoods} />
-
-                {/* Streak Tracker */}
-                <div className="mt-12">
-                    <StreakTracker moods={moods} />
-                </div>
-
-                {/* Mood Chart */}
-                <div className="mt-12">
-                    <MoodChart moods={moods} />
-                </div>
 
                 {/* Mood History */}
                 <section className="mt-12">
