@@ -13,6 +13,12 @@ export default function Navbar() {
       <Link to="/dashboard" className="text-xl font-bold text-purple-600">
         MoodMate
       </Link>
+      <Link
+        to="/self-care"
+        className="text-gray-700 font-medium hover:text-indigo-700 transition"
+      >
+        Self-Care
+      </Link>
 
       <div className="space-x-4">
         <Link to="/dashboard" className="text-gray-700 hover:text-purple-600 font-medium">
