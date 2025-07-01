@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar';
 import MoodForm from '../components/MoodForm';
 import MoodList from '../components/MoodList';
+import MoodChart from '../components/MoodChart';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import DashboardHero from '../assets/dashboard-hero.png';
@@ -22,10 +23,8 @@ export default function Dashboard() {
 
     return (
         <div className="min-h-screen bg-[#f9fafb] text-gray-800 font-sans">
-            {/* Top navbar */}
             <Navbar />
 
-            {/* Main content */}
             <main className="px-6 py-12 max-w-6xl mx-auto">
                 {/* Welcome section */}
                 <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 items-center">
@@ -46,6 +45,9 @@ export default function Dashboard() {
 
                 {/* Mood Form */}
                 <MoodForm onMoodAdded={fetchMoods} />
+
+                {/* Mood Chart */}
+                <MoodChart moods={moods} />
 
                 {/* Mood History */}
                 <section className="mt-12">
