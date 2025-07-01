@@ -30,6 +30,10 @@ export default function Navbar() {
         <Link to="/streaks" className="text-gray-700 hover:text-purple-600 font-medium">
           Streaks
         </Link>
+
+        <Link to="/breathing" className="text-gray-700 hover:text-purple-600 font-medium">
+          Breathing
+        </Link>
       </div>
 
       <button

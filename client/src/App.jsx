@@ -5,7 +5,7 @@ import Dashboard from './pages/Dashboard';
 import SelfCare from './pages/SelfCare';
 import Insights from './pages/Insights';
 import Streaks from './pages/Streaks';
-
+import Breathing from './pages/Breathing';
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +16,7 @@ function App() {
         <Route path="/self-care" element={<SelfCare />} />
         <Route path="/insights" element={<Insights />} />
         <Route path="/streaks" element={<Streaks />} />
+        <Route path="/breathing" element={<Breathing />} />
       </Routes>
     </BrowserRouter>
   );
