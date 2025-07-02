@@ -34,6 +34,10 @@ export default function Navbar() {
         <Link to="/breathing" className="text-gray-700 hover:text-purple-600 font-medium">
           Breathing
         </Link>
+
+        <Link to="/support" className="text-gray-700 hover:text-purple-600 font-medium">
+          Anonymous Support
+        </Link>
       </div>
 
       <button
