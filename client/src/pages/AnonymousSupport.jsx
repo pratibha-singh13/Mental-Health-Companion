@@ -17,6 +17,18 @@ export default function AnonymousSupport() {
         }
     };
 
+    const handleDelete = async (postId) => {
+        const confirm = window.confirm('Are you sure you want to delete this post?');
+        if (!confirm) return;
+
+        try {
+            await axios.delete(`http://localhost:5000/api/posts/${postId}`);
+            setPosts((prev) => prev.filter((post) => post._id !== postId));
+        } catch (err) {
+            alert('Failed to delete post');
+        }
+    };
+
     useEffect(() => {
         fetchPosts();
     }, []);
@@ -36,28 +48,28 @@ export default function AnonymousSupport() {
             setFiles([]);
             fetchPosts();
         } catch (err) {
-            console.error(err);
+            alert('Post failed.');
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-gradient-to-br from-[#1f0c2f] to-[#2a0c4e] text-purple-100 font-sans">
             <Navbar />
-            <div className="max-w-3xl mx-auto p-6">
-                <h1 className="text-3xl font-bold text-indigo-700 mb-6">
+            <div className="max-w-3xl mx-auto px-6 py-12 animate-fadeIn">
+                <h1 className="text-4xl font-extrabold mb-8 text-center tracking-tight bg-gradient-to-r from-purple-300 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
                     Anonymous Peer Support
                 </h1>
 
                 {/* Post Form */}
                 <form
                     onSubmit={handleSubmit}
-                    className="bg-white p-4 rounded shadow-md mb-8 space-y-4"
+                    className="bg-white/5 backdrop-blur-md border border-purple-400 shadow-[0_0_20px_rgba(192,132,252,0.2)] p-6 rounded-2xl space-y-4 mb-10 transition-all"
                     encType="multipart/form-data"
                 >
                     <textarea
-                        className="w-full border p-2 rounded"
+                        className="w-full bg-white/10 text-purple-100 placeholder-purple-300 px-4 py-3 rounded-lg border border-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
                         rows="3"
                         placeholder="Share how you're feeling..."
                         value={newPost}
@@ -69,53 +81,60 @@ export default function AnonymousSupport() {
                         accept="image/*,video/*"
                         multiple
                         onChange={(e) => setFiles([...e.target.files])}
-                        className="block"
+                        className="block text-purple-300"
                     />
 
                     <button
                         type="submit"
-                        className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
                         disabled={loading}
+                        className="bg-gradient-to-tr from-purple-600 to-fuchsia-600 text-white px-6 py-2 rounded-lg font-semibold hover:scale-105 hover:shadow-[0_0_15px_rgba(192,132,252,0.5)] transition-all duration-300"
                     >
                         {loading ? 'Posting...' : 'Post Anonymously'}
                     </button>
                 </form>
 
-                {/* Posts List */}
+                {/* Posts */}
                 <div className="space-y-6">
                     {posts.map((post) => (
                         <div
                             key={post._id}
-                            className="bg-white p-4 rounded shadow-sm border"
+                            className="relative bg-white/5 backdrop-blur-md p-5 rounded-xl border border-purple-400 shadow-[0_0_25px_rgba(168,85,247,0.3)] hover:shadow-[0_0_35px_rgba(192,132,252,0.5)] transition-all duration-300 group"
                         >
-                            <p className="text-gray-800 mb-2 whitespace-pre-wrap">
+                            <p className="text-purple-100 mb-2 whitespace-pre-wrap text-sm">
                                 {post.content}
                             </p>
 
-                            {/* Render each media item */}
+                            {/* Media */}
                             {post.media?.map((item, idx) =>
                                 item.type === 'image' ? (
                                     <img
                                         key={idx}
                                         src={item.url}
                                         alt={`Media ${idx}`}
-                                        className="w-full rounded mb-2"
+                                        className="w-full rounded mb-3 border border-purple-300"
                                     />
                                 ) : (
                                     <video
                                         key={idx}
                                         controls
-                                        className="w-full rounded mb-2"
+                                        className="w-full rounded mb-3 border border-purple-300"
                                     >
                                         <source src={item.url} type="video/mp4" />
                                     </video>
                                 )
                             )}
 
-                            <p className="text-xs text-gray-500">
-                                Posted on{' '}
-                                {new Date(post.createdAt).toLocaleString()}
+                            <p className="text-xs text-purple-300 italic">
+                                Posted on {new Date(post.createdAt).toLocaleString()}
                             </p>
+
+                            {/* Delete Button (assuming auth or owner check handled on backend) */}
+                            <button
+                                onClick={() => handleDelete(post._id)}
+                                className="absolute top-3 right-3 bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1 rounded-md shadow-sm transition-all duration-200"
+                            >
+                                Delete
+                            </button>
                         </div>
                     ))}
                 </div>

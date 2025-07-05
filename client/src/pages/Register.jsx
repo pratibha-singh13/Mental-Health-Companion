@@ -23,63 +23,67 @@ export default function Register() {
     };
 
     return (
-        <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen px-4 bg-gradient-to-br from-[#e0e7ff] to-[#f3f4f6]">
-
-            <div className="text-center lg:text-left lg:w-1/2 space-y-6 mb-12 lg:mb-0">
+        <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen px-4 bg-gradient-to-br from-[#1f0c2f] to-[#2a0c4e] text-white font-sans">
+            {/* Left Side Image & Text */}
+            <div className="text-center lg:text-left lg:w-1/2 space-y-6 mb-12 lg:mb-0 px-6">
                 <img
                     src={Hero}
                     alt="Register illustration"
-                    className="max-w-md mx-auto lg:mx-0 rounded-xl shadow-md"
+                    className="max-w-md mx-auto lg:mx-0 rounded-xl shadow-neon"
                 />
-                <h1 className="text-4xl font-bold text-primary">Create your MoodMate account</h1>
-                <p className="text-gray-600 max-w-md mx-auto lg:mx-0">
+                <h1 className="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-purple-300 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
+                    Create your MoodMate account
+                </h1>
+                <p className="text-purple-300 max-w-md mx-auto lg:mx-0">
                     Start tracking your mood, managing stress, and building emotional wellness with your personal companion.
                 </p>
             </div>
 
-
+            {/* Register Form */}
             <form
                 onSubmit={handleSubmit}
-                className="bg-white shadow-glass p-8 rounded-2xl w-full max-w-md animate__animated animate__fadeIn"
+                className="bg-white/5 backdrop-blur-md border border-purple-500 shadow-glowPrimary px-8 py-10 rounded-2xl w-full max-w-md animate-fadeUp"
             >
-                <h2 className="text-2xl font-semibold text-center mb-6 text-gray-800">Register</h2>
+                <h2 className="text-2xl font-bold text-center mb-6 text-purple-100">Register</h2>
 
-
-                <div className="flex items-center border border-gray-300 rounded-md px-4 py-2 mb-4 focus-within:ring-2 focus-within:ring-primary">
-                    <User className="text-gray-400 mr-2" size={20} />
+                {/* Username Field */}
+                <div className="flex items-center border border-purple-300 rounded-lg px-4 py-3 mb-4 bg-white/10 focus-within:ring-2 focus-within:ring-purple-500 transition">
+                    <User className="text-purple-300 mr-3" size={20} />
                     <input
                         type="text"
                         placeholder="Username"
-                        className="w-full outline-none bg-transparent"
+                        className="w-full bg-transparent text-purple-100 placeholder-purple-400 outline-none"
                         onChange={(e) => setForm({ ...form, username: e.target.value })}
+                        required
                     />
                 </div>
 
-
-                <div className="flex items-center border border-gray-300 rounded-md px-4 py-2 mb-4 focus-within:ring-2 focus-within:ring-primary">
-                    <Lock className="text-gray-400 mr-2" size={20} />
+                {/* Password Field */}
+                <div className="flex items-center border border-purple-300 rounded-lg px-4 py-3 mb-6 bg-white/10 focus-within:ring-2 focus-within:ring-purple-500 transition">
+                    <Lock className="text-purple-300 mr-3" size={20} />
                     <input
                         type="password"
                         placeholder="Password"
-                        className="w-full outline-none bg-transparent"
+                        className="w-full bg-transparent text-purple-100 placeholder-purple-400 outline-none"
                         onChange={(e) => setForm({ ...form, password: e.target.value })}
+                        required
                     />
                 </div>
 
-
+                {/* Register Button */}
                 <button
                     type="submit"
-                    className="mt-4 w-full bg-primary text-white font-semibold py-2 rounded-md hover:bg-indigo-700 transition"
+                    className="w-full bg-gradient-to-tr from-purple-600 to-fuchsia-600 text-white font-semibold py-3 rounded-lg hover:scale-105 shadow-glowPrimary transition-all"
                 >
                     Create Account
                 </button>
 
-
-                <p className="text-center mt-6 text-sm text-gray-600">
-                    Already have an account?{" "}
+                {/* Login Redirect */}
+                <p className="text-center mt-6 text-sm text-purple-300">
+                    Already have an account?{' '}
                     <span
-                        className="text-primary font-medium hover:underline cursor-pointer"
-                        onClick={() => navigate("/")}
+                        onClick={() => navigate('/')}
+                        className="text-purple-200 hover:underline cursor-pointer font-medium"
                     >
                         Login
                     </span>

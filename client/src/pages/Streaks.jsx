@@ -45,19 +45,26 @@ export default function Streaks() {
     const streak = useMemo(() => calculateStreak(moods), [moods]);
 
     return (
-        <div className="min-h-screen bg-[#f9fafb] text-gray-800 font-sans">
+        <div className="min-h-screen bg-gradient-to-br from-[#1f0c2f] to-[#2a0c4e] text-purple-100 font-sans">
             <Navbar />
 
-            <main className="px-6 py-12 max-w-3xl mx-auto">
-                <h1 className="text-4xl font-bold mb-10 text-indigo-700 text-center">Your Mood Streak 🔥</h1>
+            <main className="px-6 py-16 max-w-3xl mx-auto animate-fadeUp">
+                <h1 className="text-4xl font-extrabold text-center mb-12 tracking-tight bg-gradient-to-r from-purple-300 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
+                    Your Mood Streak
+                </h1>
 
-                <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
-                    <h2 className="text-2xl font-semibold text-indigo-600 mb-3">Current Streak</h2>
-                    <p className="text-6xl font-bold text-gray-900 mb-2">{streak}</p>
-                    <p className="text-md text-gray-500">days of consistent check-ins</p>
+                <div className="bg-white/5 backdrop-blur-md border border-purple-500 rounded-3xl px-10 py-12 text-center shadow-[0_0_20px_rgba(192,132,252,0.3)] hover:shadow-[0_0_35px_rgba(192,132,252,0.5)] transition-all duration-300">
+                    <h2 className="text-2xl font-semibold text-purple-200 mb-4">Current Streak</h2>
+
+                    <p className="text-7xl font-bold text-purple-100 mb-4 animate-pulse drop-shadow-md">
+                        {streak}
+                    </p>
+                    <p className="text-md text-purple-300">days of consistent check-ins</p>
 
                     {streak >= 7 && (
-                        <p className="mt-6 text-green-600 font-semibold">🎉 Great job! You've been consistent for a week!</p>
+                        <p className="mt-6 text-green-400 font-semibold text-lg animate-fadeIn">
+                            🎉 Great job! You've been consistent for a week!
+                        </p>
                     )}
                 </div>
             </main>
