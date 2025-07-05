@@ -2,7 +2,8 @@ const express = require('express');
 const multer = require('multer');
 const { v2: cloudinary } = require('cloudinary');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const AnonymousPost = require('../models/AnonymousPost');
+const authMiddleware = require('../middleware/authMiddleware');
+const controller = require('../controllers/anonymousPostController');
 
 const router = express.Router();
 
@@ -18,41 +19,17 @@ const storage = new CloudinaryStorage({
     cloudinary,
     params: {
         folder: 'anonymous_posts',
-        resource_type: 'auto', // image/video
+        resource_type: 'auto',
     },
 });
 
 const upload = multer({ storage });
 
-// POST: create anonymous post with multiple media
-router.post('/', upload.array('media', 5), async (req, res) => {
-    try {
-        const media = req.files.map(file => ({
-            url: file.path,
-            type: file.mimetype.startsWith('video') ? 'video' : 'image',
-        }));
-
-        const post = new AnonymousPost({
-            content: req.body.content,
-            media,
-        });
-
-        await post.save();
-        res.status(201).json(post);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Failed to create post' });
-    }
-});
-
-// GET: fetch all posts
-router.get('/', async (req, res) => {
-    try {
-        const posts = await AnonymousPost.find().sort({ createdAt: -1 });
-        res.json(posts);
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch posts' });
-    }
-});
+// Routes
+router.post('/', authMiddleware, upload.array('media', 5), controller.createPost);
+router.get('/', controller.getAllPosts);
+router.delete('/:id', authMiddleware, controller.deletePost);
+router.put('/:id/like', authMiddleware, controller.toggleLike);
+router.post('/:id/comment', authMiddleware, controller.addComment);
 
 module.exports = router;

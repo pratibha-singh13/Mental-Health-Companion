@@ -22,7 +22,12 @@ export default function AnonymousSupport() {
         if (!confirm) return;
 
         try {
-            await axios.delete(`http://localhost:5000/api/posts/${postId}`);
+            const token = localStorage.getItem('token');
+            await axios.delete(`http://localhost:5000/api/posts/${postId}`, {
+                headers: {
+                    'x-auth-token': token,
+                },
+            });
             setPosts((prev) => prev.filter((post) => post._id !== postId));
         } catch (err) {
             alert('Failed to delete post');
@@ -41,9 +46,16 @@ export default function AnonymousSupport() {
         formData.append('content', newPost);
         files.forEach((file) => formData.append('media', file));
 
+        const token = localStorage.getItem('token');
         setLoading(true);
+
         try {
-            await axios.post('http://localhost:5000/api/posts', formData);
+            await axios.post('http://localhost:5000/api/posts', formData, {
+                headers: {
+                    'x-auth-token': token,
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
             setNewPost('');
             setFiles([]);
             fetchPosts();
@@ -104,7 +116,6 @@ export default function AnonymousSupport() {
                                 {post.content}
                             </p>
 
-                            {/* Media */}
                             {post.media?.map((item, idx) =>
                                 item.type === 'image' ? (
                                     <img
@@ -128,13 +139,14 @@ export default function AnonymousSupport() {
                                 Posted on {new Date(post.createdAt).toLocaleString()}
                             </p>
 
-                            {/* Delete Button (assuming auth or owner check handled on backend) */}
+                            {/* Delete Button */}
                             <button
                                 onClick={() => handleDelete(post._id)}
                                 className="absolute top-3 right-3 bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1 rounded-md shadow-sm transition-all duration-200"
                             >
                                 Delete
                             </button>
+
                         </div>
                     ))}
                 </div>
