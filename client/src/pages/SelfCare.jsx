@@ -12,7 +12,7 @@ export default function SelfCare() {
         setLoading(true);
         try {
             const res = await axios.post('http://localhost:5000/api/ai/suggest', { mood });
-            setSuggestion(res.data.suggestion); // 🔥 FIXED
+            setSuggestion(res.data.suggestion);
         } catch (err) {
             alert('Failed to fetch suggestions');
         }
@@ -20,31 +20,48 @@ export default function SelfCare() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-blue-50 text-gray-800 font-sans">
+        <div className="min-h-screen bg-gradient-to-br from-[#1f0c2f] to-[#2a0c4e] text-purple-100 font-sans">
             <Navbar />
-            <div className="max-w-3xl mx-auto px-6 py-10 animate-fadeIn">
-                <h1 className="text-4xl font-bold mb-6 text-indigo-700">Personalized Self-Care</h1>
-                <p className="mb-4 text-lg text-gray-600">Let us suggest something supportive based on your current mood.</p>
+            <div className="max-w-3xl mx-auto px-6 py-12 animate-fadeIn">
+                <h1 className="text-4xl font-extrabold mb-4 tracking-tight bg-gradient-to-r from-purple-300 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
+                    Personalized Self-Care
+                </h1>
+                <p className="mb-8 text-lg text-purple-300">
+                    Let us suggest something supportive based on your current mood.
+                </p>
 
-                <div className="bg-white shadow-lg p-6 rounded-xl space-y-4 transition-all">
+                {/* Input Form Box */}
+                <div className="bg-white/5 backdrop-blur-md border border-purple-500 rounded-2xl px-6 py-8 space-y-6 
+                                shadow-[0_0_20px_rgba(192,132,252,0.3)] hover:shadow-[0_0_35px_rgba(192,132,252,0.5)] 
+                                transition-all duration-500">
+
+                    {/* Mood Input */}
                     <input
-                        className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                        className="w-full bg-white/10 text-purple-100 placeholder-purple-300 px-4 py-3 rounded-lg 
+                                   border border-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-400 
+                                   transition"
                         placeholder="e.g., I feel anxious, tired, overwhelmed..."
                         value={mood}
                         onChange={(e) => setMood(e.target.value)}
                     />
+
+                    {/* Generate Button */}
                     <button
                         onClick={handleGenerate}
-                        className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition"
                         disabled={loading}
+                        className="w-full bg-gradient-to-tr from-purple-600 to-fuchsia-600 text-white px-6 py-3 
+                                   rounded-lg font-semibold hover:scale-105 
+                                   hover:shadow-[0_0_15px_rgba(192,132,252,0.5)] transition-all duration-300"
                     >
                         {loading ? 'Thinking...' : 'Get Suggestions'}
                     </button>
 
+                    {/* AI Suggestion Output */}
                     {suggestion && (
-                        <div className="mt-6 border-t pt-4 space-y-2 text-gray-700 whitespace-pre-line">
-                            <h3 className="font-semibold text-lg">Your AI Suggestion:</h3>
-                            <p className="text-gray-800">{suggestion}</p>
+                        <div className="mt-8 bg-purple-900/10 border border-purple-400 text-purple-100 px-5 py-6 
+                                        rounded-xl shadow-md animate-fadeUp whitespace-pre-line transition">
+                            <h3 className="text-lg font-semibold mb-2 text-purple-200">Your AI Suggestion:</h3>
+                            <p className="text-purple-100 leading-relaxed">{suggestion}</p>
                         </div>
                     )}
                 </div>

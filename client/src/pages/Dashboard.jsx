@@ -3,7 +3,6 @@ import MoodForm from '../components/MoodForm';
 import MoodList from '../components/MoodList';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import DashboardHero from '../assets/dashboard-hero.png';
 
 export default function Dashboard() {
     const [moods, setMoods] = useState([]);
@@ -21,32 +20,27 @@ export default function Dashboard() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#f9fafb] text-gray-800 font-sans">
+        <div className="min-h-screen bg-gradient-to-br from-[#0e0e15] to-[#1b1b2f] text-[#e0e0e0] font-sans relative">
+            <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 pointer-events-none"></div>
+
             <Navbar />
 
-            <main className="px-6 py-12 max-w-6xl mx-auto">
+            <main className="px-6 py-16 max-w-6xl mx-auto z-10 relative">
                 {/* Welcome section */}
-                <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 items-center">
-                    <div>
-                        <h1 className="text-4xl font-bold text-gray-900 mb-4 leading-snug">
-                            Welcome to Your Mental Wellness Space
-                        </h1>
-                        <p className="text-gray-600 text-base">
-                            Track your mood, reflect on your thoughts, and take a step towards emotional well-being — all in one place.
-                        </p>
-                    </div>
-                    <img
-                        src={DashboardHero}
-                        alt="Dashboard visual"
-                        className="rounded-xl shadow-xl w-full object-cover"
-                    />
+                <section className="mb-14 text-center">
+                    <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-indigo-400 to-pink-500 text-transparent bg-clip-text">
+                        Your Mood Space
+                    </h1>
+                    <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+                        Reflect, express, and track your emotional journey with clarity and calm.
+                    </p>
                 </section>
 
                 {/* Mood Form */}
                 <MoodForm onMoodAdded={fetchMoods} />
 
                 {/* Mood History */}
-                <section className="mt-12">
+                <section className="mt-16">
                     <MoodList moods={moods} />
                 </section>
             </main>

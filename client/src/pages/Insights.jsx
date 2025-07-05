@@ -2,18 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import {
-    LineChart,
-    Line,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    ResponsiveContainer,
-    PieChart,
-    Pie,
-    Cell,
-    BarChart,
-    Bar
+    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
+    ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar
 } from 'recharts';
 
 const moodToScore = {
@@ -25,7 +15,7 @@ const moodToScore = {
     Angry: 0
 };
 
-const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#00C49F', '#FFBB28'];
+const COLORS = ['#c084fc', '#a78bfa', '#818cf8', '#f472b6', '#facc15', '#34d399'];
 
 function formatDate(dateStr) {
     const d = new Date(dateStr);
@@ -35,8 +25,7 @@ function formatDate(dateStr) {
 function filterByTimeRange(data, range) {
     const now = new Date();
     return data.filter((item) => {
-        const date = new Date(item.date || item.createdAt); // ✅ fixed here
-
+        const date = new Date(item.date || item.createdAt);
         if (range === 'week') {
             const oneWeekAgo = new Date(now);
             oneWeekAgo.setDate(now.getDate() - 7);
@@ -46,8 +35,7 @@ function filterByTimeRange(data, range) {
         } else if (range === 'year') {
             return date.getFullYear() === now.getFullYear();
         }
-
-        return true; // All time
+        return true;
     });
 }
 
@@ -60,7 +48,6 @@ export default function Insights() {
         const res = await axios.get('http://localhost:5000/api/mood', {
             headers: { 'x-auth-token': token }
         });
-        console.log("Fetched moods:", res.data); // ✅ helpful debug
         setMoods(res.data);
     };
 
@@ -98,16 +85,19 @@ export default function Insights() {
     }));
 
     return (
-        <div className="min-h-screen bg-[#f9fafb] text-gray-800 font-sans">
+        <div className="min-h-screen bg-gradient-to-br from-[#1f0c2f] to-[#2a0c4e] text-purple-100 font-sans">
             <Navbar />
 
             <main className="px-6 py-12 max-w-6xl mx-auto">
-                <h1 className="text-4xl font-bold mb-8 text-indigo-700">Mood Insights</h1>
+                <h1 className="text-4xl font-extrabold mb-8 tracking-tight bg-gradient-to-r from-purple-300 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
+                    Mood Insights
+                </h1>
 
-                <div className="mb-6">
-                    <label className="mr-3 font-medium">Filter by:</label>
+                {/* Filter dropdown */}
+                <div className="mb-8">
+                    <label className="mr-3 font-medium text-purple-200">Filter by:</label>
                     <select
-                        className="border px-3 py-2 rounded-md"
+                        className="bg-white/10 border border-purple-400 text-purple-100 px-4 py-2 rounded-lg focus:ring-2 focus:ring-purple-500"
                         value={filter}
                         onChange={(e) => setFilter(e.target.value)}
                     >
@@ -119,29 +109,29 @@ export default function Insights() {
                 </div>
 
                 {/* Line Chart */}
-                <div className="bg-white p-6 rounded-2xl shadow-md mb-12">
-                    <h2 className="text-2xl font-semibold mb-4 text-gray-800">Mood Trend</h2>
+                <div className="bg-white/5 backdrop-blur-md border border-purple-500 rounded-2xl px-6 py-8 shadow-[0_0_20px_rgba(192,132,252,0.2)] hover:shadow-[0_0_30px_rgba(192,132,252,0.4)] transition mb-12">
+                    <h2 className="text-2xl font-semibold mb-4 text-purple-100">Mood Trend</h2>
                     {chartData.length === 0 ? (
-                        <p className="text-gray-500 italic">Not enough data yet. Start tracking your mood!</p>
+                        <p className="text-purple-300 italic">Not enough data yet. Start tracking your mood!</p>
                     ) : (
                         <ResponsiveContainer width="100%" height={300}>
                             <LineChart data={chartData}>
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="date" />
-                                <YAxis domain={[0, 5]} ticks={[0, 1, 2, 3, 4, 5]} />
+                                <CartesianGrid strokeDasharray="3 3" stroke="#4b5563" />
+                                <XAxis dataKey="date" stroke="#d8b4fe" />
+                                <YAxis domain={[0, 5]} ticks={[0, 1, 2, 3, 4, 5]} stroke="#d8b4fe" />
                                 <Tooltip
+                                    contentStyle={{ background: '#3b0764', borderColor: '#a855f7', color: '#fff' }}
                                     formatter={(value) => {
-                                        const moodLabel =
-                                            Object.entries(moodToScore).find(([k, v]) => v === value)?.[0] || value;
+                                        const moodLabel = Object.entries(moodToScore).find(([k, v]) => v === value)?.[0] || value;
                                         return [moodLabel, 'Mood'];
                                     }}
                                 />
                                 <Line
                                     type="monotone"
                                     dataKey="score"
-                                    stroke="#6366f1"
+                                    stroke="#c084fc"
                                     strokeWidth={3}
-                                    dot={{ r: 5, fill: '#6366f1' }}
+                                    dot={{ r: 5, fill: '#c084fc' }}
                                 />
                             </LineChart>
                         </ResponsiveContainer>
@@ -149,37 +139,37 @@ export default function Insights() {
                 </div>
 
                 {/* Pie Chart */}
-                <div className="bg-white p-6 rounded-2xl shadow-md mb-12">
-                    <h2 className="text-2xl font-semibold mb-4 text-gray-800">Mood Distribution</h2>
+                <div className="bg-white/5 backdrop-blur-md border border-purple-500 rounded-2xl px-6 py-8 shadow-[0_0_20px_rgba(192,132,252,0.2)] hover:shadow-[0_0_30px_rgba(192,132,252,0.4)] transition mb-12">
+                    <h2 className="text-2xl font-semibold mb-4 text-purple-100">Mood Distribution</h2>
                     {pieData.length === 0 ? (
-                        <p className="text-gray-500 italic">No moods recorded yet.</p>
+                        <p className="text-purple-300 italic">No moods recorded yet.</p>
                     ) : (
                         <ResponsiveContainer width="100%" height={300}>
                             <PieChart>
-                                <Pie data={pieData} dataKey="value" nameKey="name" outerRadius={100} label>
+                                <Pie data={pieData} dataKey="value" nameKey="name" outerRadius={100} label fill="#fff">
                                     {pieData.map((_, index) => (
                                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                     ))}
                                 </Pie>
-                                <Tooltip />
+                                <Tooltip contentStyle={{ background: '#3b0764', borderColor: '#a855f7', color: '#fff' }} />
                             </PieChart>
                         </ResponsiveContainer>
                     )}
                 </div>
 
                 {/* Bar Chart */}
-                <div className="bg-white p-6 rounded-2xl shadow-md">
-                    <h2 className="text-2xl font-semibold mb-4 text-gray-800">Weekly Mood Averages</h2>
+                <div className="bg-white/5 backdrop-blur-md border border-purple-500 rounded-2xl px-6 py-8 shadow-[0_0_20px_rgba(192,132,252,0.2)] hover:shadow-[0_0_30px_rgba(192,132,252,0.4)] transition">
+                    <h2 className="text-2xl font-semibold mb-4 text-purple-100">Weekly Mood Averages</h2>
                     {barData.length === 0 ? (
-                        <p className="text-gray-500 italic">Not enough data yet.</p>
+                        <p className="text-purple-300 italic">Not enough data yet.</p>
                     ) : (
                         <ResponsiveContainer width="100%" height={300}>
                             <BarChart data={barData}>
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="label" />
-                                <YAxis />
-                                <Tooltip />
-                                <Bar dataKey="avgMood" fill="#6366f1" />
+                                <CartesianGrid strokeDasharray="3 3" stroke="#4b5563" />
+                                <XAxis dataKey="label" stroke="#d8b4fe" />
+                                <YAxis stroke="#d8b4fe" />
+                                <Tooltip contentStyle={{ background: '#3b0764', borderColor: '#a855f7', color: '#fff' }} />
+                                <Bar dataKey="avgMood" fill="#c084fc" />
                             </BarChart>
                         </ResponsiveContainer>
                     )}
