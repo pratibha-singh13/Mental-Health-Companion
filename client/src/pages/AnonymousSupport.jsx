@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Trash2, Heart, MessageCircle } from 'lucide-react';
 import Navbar from '../components/Navbar';
 
 export default function AnonymousSupport() {
@@ -7,6 +8,26 @@ export default function AnonymousSupport() {
     const [newPost, setNewPost] = useState('');
     const [files, setFiles] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [userId, setUserId] = useState(null);
+    const [commentText, setCommentText] = useState({});
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const token = localStorage.getItem('token');
+            if (!token) return;
+            try {
+                const res = await axios.get('http://localhost:5000/api/auth/me', {
+                    headers: { 'x-auth-token': token },
+                });
+                setUserId(res.data.id);
+            } catch (err) {
+                console.error('Failed to fetch user');
+            }
+        };
+
+        fetchUser();
+        fetchPosts();
+    }, []);
 
     const fetchPosts = async () => {
         try {
@@ -18,25 +39,17 @@ export default function AnonymousSupport() {
     };
 
     const handleDelete = async (postId) => {
-        const confirm = window.confirm('Are you sure you want to delete this post?');
-        if (!confirm) return;
-
+        if (!window.confirm('Are you sure you want to delete this post?')) return;
         try {
             const token = localStorage.getItem('token');
             await axios.delete(`http://localhost:5000/api/posts/${postId}`, {
-                headers: {
-                    'x-auth-token': token,
-                },
+                headers: { 'x-auth-token': token },
             });
-            setPosts((prev) => prev.filter((post) => post._id !== postId));
+            fetchPosts();
         } catch (err) {
             alert('Failed to delete post');
         }
     };
-
-    useEffect(() => {
-        fetchPosts();
-    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -48,7 +61,6 @@ export default function AnonymousSupport() {
 
         const token = localStorage.getItem('token');
         setLoading(true);
-
         try {
             await axios.post('http://localhost:5000/api/posts', formData, {
                 headers: {
@@ -65,6 +77,113 @@ export default function AnonymousSupport() {
             setLoading(false);
         }
     };
+
+    const handleLike = async (postId) => {
+        try {
+            const token = localStorage.getItem('token');
+            await axios.put(`http://localhost:5000/api/posts/${postId}/like`, {}, {
+                headers: { 'x-auth-token': token },
+            });
+            fetchPosts();
+        } catch (err) {
+            console.error('Like failed');
+        }
+    };
+
+    const handleComment = async (postId) => {
+        try {
+            const token = localStorage.getItem('token');
+            await axios.post(
+                `http://localhost:5000/api/posts/${postId}/comment`,
+                { text: commentText[postId] },
+                { headers: { 'x-auth-token': token } }
+            );
+            setCommentText(prev => ({ ...prev, [postId]: '' }));
+            fetchPosts();
+        } catch (err) {
+            console.error('Comment failed');
+        }
+    };
+
+    const myPosts = posts.filter((post) => post.owner?._id?.toString() === userId?.toString());
+    const otherPosts = posts.filter((post) => post.owner?._id?.toString() !== userId?.toString());
+
+    const renderPost = (post) => (
+        <div
+            key={post._id}
+            className="relative bg-white/5 backdrop-blur-lg p-5 sm:p-6 rounded-2xl border border-purple-500 shadow-[0_0_30px_rgba(168,85,247,0.3)] hover:shadow-[0_0_50px_rgba(192,132,252,0.6)] transition-all duration-300 space-y-4"
+        >
+            <p className="text-purple-100 text-sm whitespace-pre-wrap">{post.content}</p>
+
+            {post.media?.map((item, idx) =>
+                item.type === 'image' ? (
+                    <img
+                        key={idx}
+                        src={item.url}
+                        alt="Media"
+                        className="w-full rounded-xl border border-purple-300 object-cover"
+                    />
+                ) : (
+                    <video key={idx} controls className="w-full rounded-xl border border-purple-300">
+                        <source src={item.url} type="video/mp4" />
+                    </video>
+                )
+            )}
+
+            <div className="text-xs text-purple-300 italic flex justify-between items-center">
+                <span>{new Date(post.createdAt).toLocaleString()}</span>
+                {post.owner?._id === userId && (
+                    <button
+                        onClick={() => handleDelete(post._id)}
+                        className="text-red-400 hover:text-red-500 transition"
+                        title="Delete post"
+                    >
+                        <Trash2 size={16} />
+                    </button>
+                )}
+            </div>
+
+            <div className="flex items-center gap-6 text-fuchsia-300 text-sm">
+                <button
+                    onClick={() => handleLike(post._id)}
+                    className="flex items-center gap-1 transition-transform hover:scale-110 active:scale-95 group"
+                >
+                    {post.likedBy.includes(userId) ? (
+                        <Heart className="w-5 h-5 text-red-500 fill-red-500 group-hover:animate-ping-slow" />
+                    ) : (
+                        <Heart className="w-5 h-5 text-purple-300" />
+                    )}
+                    <span>{post.reactions || 0}</span>
+                </button>
+            </div>
+
+
+            <div className="space-y-2 mt-3">
+                <div className="flex items-center gap-2">
+                    <MessageCircle size={16} className="text-fuchsia-300" />
+                    <input
+                        type="text"
+                        placeholder="Write a comment..."
+                        value={commentText[post._id] || ''}
+                        onChange={(e) => setCommentText(prev => ({ ...prev, [post._id]: e.target.value }))}
+                        className="flex-1 px-3 py-1 rounded bg-purple-100 text-black text-sm"
+                    />
+                    <button
+                        onClick={() => handleComment(post._id)}
+                        className="text-sm text-fuchsia-200 hover:underline"
+                    >
+                        Comment
+                    </button>
+                </div>
+
+                <ul className="text-sm text-purple-200 list-disc ml-5">
+                    {post.comments?.map((c, i) => (
+                        <li key={i}>{c.text}</li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    );
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#1f0c2f] to-[#2a0c4e] text-purple-100 font-sans">
@@ -105,50 +224,14 @@ export default function AnonymousSupport() {
                     </button>
                 </form>
 
-                {/* Posts */}
-                <div className="space-y-6">
-                    {posts.map((post) => (
-                        <div
-                            key={post._id}
-                            className="relative bg-white/5 backdrop-blur-md p-5 rounded-xl border border-purple-400 shadow-[0_0_25px_rgba(168,85,247,0.3)] hover:shadow-[0_0_35px_rgba(192,132,252,0.5)] transition-all duration-300 group"
-                        >
-                            <p className="text-purple-100 mb-2 whitespace-pre-wrap text-sm">
-                                {post.content}
-                            </p>
+                <h2 className="text-xl font-bold mb-4 border-b border-purple-500 pb-2">My Posts</h2>
+                <div className="space-y-8 mb-10">
+                    {myPosts.map(renderPost)}
+                </div>
 
-                            {post.media?.map((item, idx) =>
-                                item.type === 'image' ? (
-                                    <img
-                                        key={idx}
-                                        src={item.url}
-                                        alt={`Media ${idx}`}
-                                        className="w-full rounded mb-3 border border-purple-300"
-                                    />
-                                ) : (
-                                    <video
-                                        key={idx}
-                                        controls
-                                        className="w-full rounded mb-3 border border-purple-300"
-                                    >
-                                        <source src={item.url} type="video/mp4" />
-                                    </video>
-                                )
-                            )}
-
-                            <p className="text-xs text-purple-300 italic">
-                                Posted on {new Date(post.createdAt).toLocaleString()}
-                            </p>
-
-                            {/* Delete Button */}
-                            <button
-                                onClick={() => handleDelete(post._id)}
-                                className="absolute top-3 right-3 bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1 rounded-md shadow-sm transition-all duration-200"
-                            >
-                                Delete
-                            </button>
-
-                        </div>
-                    ))}
+                <h2 className="text-xl font-bold mb-4 border-b border-purple-500 pb-2">Other Posts</h2>
+                <div className="space-y-8">
+                    {otherPosts.map(renderPost)}
                 </div>
             </div>
         </div>
