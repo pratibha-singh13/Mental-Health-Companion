@@ -86,3 +86,14 @@ This project was collaboratively developed by a team of four developers during a
    ```bash
    git clone https://github.com/pratibha-singh13/Mental-Health-Companion.git
    cd Mental-Health-Companion
+2. ## Setup
+1. Copy .env.example → .env (fill variables)
+2. npm install in server/ and client/
+3. npm run dev in root if you create a combined script, or separate:
+   - cd server && npm start
+   - cd client && npm run dev
+
+## Required environment variables
+- MONGO_URI
+- JWT_SECRET
+- CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET
