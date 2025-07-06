@@ -22,7 +22,7 @@ exports.createPost = async (req, res) => {
     }
 };
 
-// Fetch all posts
+
 exports.getAllPosts = async (req, res) => {
     try {
         const posts = await AnonymousPost.find()
@@ -51,7 +51,7 @@ exports.deletePost = async (req, res) => {
     }
 };
 
-// Like/unlike post
+
 exports.toggleLike = async (req, res) => {
     try {
         const post = await AnonymousPost.findById(req.params.id);
@@ -73,7 +73,7 @@ exports.toggleLike = async (req, res) => {
     }
 };
 
-// Add comment
+
 exports.addComment = async (req, res) => {
     try {
         const post = await AnonymousPost.findById(req.params.id);
