@@ -35,7 +35,7 @@ export default function SelfCare() {
                                 shadow-[0_0_20px_rgba(192,132,252,0.3)] hover:shadow-[0_0_35px_rgba(192,132,252,0.5)] 
                                 transition-all duration-500">
 
-                    {/* Mood Input */}
+                   
                     <input
                         className="w-full bg-white/10 text-purple-100 placeholder-purple-300 px-4 py-3 rounded-lg 
                                    border border-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-400 
