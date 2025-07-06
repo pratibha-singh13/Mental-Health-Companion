@@ -2,14 +2,14 @@
 
 > A modern, secure, and user-centric MERN stack application designed to empower individuals to track their emotional well-being, build healthy self-care habits, and seek support through a safe community space.
 
-![Project Banner](https://img.shields.io/badge/Made%20with-MERN-blueviolet?style=for-the-badge)  
-![License](https://img.shields.io/github/license/pratibha-singh13/Mental-Health-Companion?style=flat-square)  
+![Project Banner](https://img.shields.io/badge/Made%20with-MERN-blueviolet?style=for-the-badge)
+![License](https://img.shields.io/github/license/pratibha-singh13/Mental-Health-Companion?style=flat-square)
 ![Issues](https://img.shields.io/github/issues/pratibha-singh13/Mental-Health-Companion?style=flat-square)
 
 ---
 
-## 🚀 Live Demo (Optional)
-*Coming Soon / Deployed Link here if hosted*
+## 🚀 Live Demo
+*Coming Soon* – Deployment in progress
 
 ---
 
@@ -25,7 +25,7 @@ This project was collaboratively developed by a team of four developers during a
 
 ### ✅ Mood & Self-Care Tracking
 - 🎭 Daily mood check-ins with emoji-based selection
-- 🛌 Sleep, 💧 Water, 🏋️‍♂️ Exercise, 🧘 Meditation, 📓 Journaling tracking
+- 🛌 Sleep, 💧 Water, 🏋️ Exercise, 🧘 Meditation, 📓 Journaling tracking
 - 📝 Optional personal reflections and notes
 
 ### 📊 Personalized Insights Dashboard
@@ -73,5 +73,16 @@ This project was collaboratively developed by a team of four developers during a
 
 ---
 
-## 📁 Folder Structure
+## ⚙️ Setup Instructions
 
+### 🔧 Prerequisites
+- Node.js & npm
+- MongoDB URI (local or cloud)
+- Cloudinary account (for media uploads)
+
+### 📥 Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/pratibha-singh13/Mental-Health-Companion.git
+   cd Mental-Health-Companion
