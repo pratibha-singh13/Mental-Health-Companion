@@ -56,7 +56,7 @@ export default function SelfCare() {
                         {loading ? 'Thinking...' : 'Get Suggestions'}
                     </button>
 
-                    {/* AI Suggestion Output */}
+                   
                     {suggestion && (
                         <div className="mt-8 bg-purple-900/10 border border-purple-400 text-purple-100 px-5 py-6 
                                         rounded-xl shadow-md animate-fadeUp whitespace-pre-line transition">
