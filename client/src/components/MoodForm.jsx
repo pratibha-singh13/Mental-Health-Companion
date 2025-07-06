@@ -36,7 +36,7 @@ export default function MoodForm({ onMoodAdded }) {
                     How are you feeling today?
                 </h2>
 
-                {/* Mood Selection */}
+               
                 <div>
                     <p className="text-sm text-purple-200 mb-3">Choose a mood:</p>
                     <div className="flex flex-wrap gap-4">
@@ -57,7 +57,7 @@ export default function MoodForm({ onMoodAdded }) {
                     </div>
                 </div>
 
-                {/* Notes */}
+               
                 <div>
                     <label className="block mb-2 text-sm font-medium text-pink-200">Want to reflect more?</label>
                     <textarea
@@ -69,7 +69,7 @@ export default function MoodForm({ onMoodAdded }) {
                     />
                 </div>
 
-                {/* Submit Button */}
+                
                 <button
                     type="submit"
                     className="w-full bg-gradient-to-r from-purple-500 to-fuchsia-600 text-white py-3 rounded-md font-semibold tracking-wide border border-purple-400 shadow-[0_0_16px_rgba(192,132,252,0.6)] hover:shadow-[0_0_25px_rgba(192,132,252,0.9)] transition duration-300"
