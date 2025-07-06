@@ -30,7 +30,7 @@ export default function SelfCare() {
                     Let us suggest something supportive based on your current mood.
                 </p>
 
-                {/* Input Form Box */}
+               
                 <div className="bg-white/5 backdrop-blur-md border border-purple-500 rounded-2xl px-6 py-8 space-y-6 
                                 shadow-[0_0_20px_rgba(192,132,252,0.3)] hover:shadow-[0_0_35px_rgba(192,132,252,0.5)] 
                                 transition-all duration-500">
