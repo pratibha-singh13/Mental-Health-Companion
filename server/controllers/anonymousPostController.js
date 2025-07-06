@@ -1,6 +1,6 @@
 const AnonymousPost = require('../models/AnonymousPost');
 
-// Create post
+
 exports.createPost = async (req, res) => {
     try {
         const media = req.files.map(file => ({
