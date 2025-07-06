@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-//jhjhjh
+
 router.post('/suggest', async (req, res) => {
     const { mood } = req.body;
 
