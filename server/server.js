@@ -13,7 +13,7 @@ app.use('/api/mood', require('./routes/mood'));
 app.use('/api/ai', require('./routes/ai'));
 app.use('/api/posts', require('./routes/anonymousPosts'));
 
-// MongoDB Connection
+
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB connected"))
     .catch((err) => console.error("MongoDB error:", err));
