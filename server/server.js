@@ -9,7 +9,7 @@ app.use(express.json());
 
 
 app.use('/api/auth', require('./routes/auth'));
-app.use('/api/mood', require('./routes/mood'));
+app.use('/api/selfcare', require('./routes/selfcare'));
 app.use('/api/ai', require('./routes/ai'));
 app.use('/api/posts', require('./routes/anonymousPosts'));
 
