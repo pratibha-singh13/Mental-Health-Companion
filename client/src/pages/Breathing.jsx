@@ -50,7 +50,7 @@ export default function Breathing() {
                     Breathe deeply, calm your mind, and bring yourself back to the present.
                 </p>
 
-                {/* Toggle Mode */}
+                
                 <div className="flex justify-center gap-6 mb-12">
                     <button
                         onClick={() => setMode('circle')}
@@ -72,7 +72,7 @@ export default function Breathing() {
                     </button>
                 </div>
 
-                {/* Animation */}
+               
                 {isRunning && (
                     <div className="mb-8">
                         <img
@@ -101,7 +101,7 @@ export default function Breathing() {
                     </button>
                 )}
 
-                {/* Info Box */}
+                
                 {!isRunning && mode === 'box' && (
                     <div className="mt-10 bg-white/5 border border-purple-400 p-6 rounded-xl backdrop-blur-md text-purple-100 shadow-[0_0_15px_rgba(192,132,252,0.3)]">
                         <h3 className="text-lg font-semibold mb-2 text-purple-200">Box Breathing (4–7–8)</h3>
