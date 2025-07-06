@@ -8,7 +8,7 @@ const User = require('../models/User');
 router.post('/register', register);
 router.post('/login', login);
 
-// ✅ Get currently logged-in user
+
 router.get('/me', authMiddleware, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
