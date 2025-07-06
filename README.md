@@ -90,7 +90,7 @@ This project was collaboratively developed by a team of four developers during a
 1. Copy .env.example → .env (fill variables)
 2. npm install in server/ and client/
 3. npm run dev in root if you create a combined script, or separate:
-   - cd server && npm start
+   - cd server && npm run dev
    - cd client && npm run dev
 
 ## Required environment variables
