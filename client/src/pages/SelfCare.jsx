@@ -45,7 +45,7 @@ export default function SelfCare() {
                         onChange={(e) => setMood(e.target.value)}
                     />
 
-                    {/* Generate Button */}
+                    
                     <button
                         onClick={handleGenerate}
                         disabled={loading}
