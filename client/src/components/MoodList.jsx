@@ -46,13 +46,13 @@ export default function MoodList({ moods }) {
                                 {formatDate(mood.date)}
                             </div>
 
-                            {/* Mood + Emoji */}
+                            
                             <div className="text-xl font-semibold text-white flex items-center gap-2 capitalize">
                                 <span className="text-2xl">{emojiMap[mood.mood] || '🧠'}</span>
                                 {mood.mood}
                             </div>
 
-                            {/* Note */}
+                           
                             {mood.note && (
                                 <div className="flex items-start gap-2 text-sm text-purple-200 mt-2">
                                     <Quote className="w-4 h-4 mt-1 text-purple-400" />
