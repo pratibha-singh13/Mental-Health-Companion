@@ -26,7 +26,7 @@ export default function Dashboard() {
             <Navbar />
 
             <main className="px-6 py-16 max-w-6xl mx-auto z-10 relative">
-                {/* Welcome section */}
+                
                 <section className="mb-14 text-center">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-indigo-400 to-pink-500 text-transparent bg-clip-text">
                         Your Mood Space
@@ -36,10 +36,10 @@ export default function Dashboard() {
                     </p>
                 </section>
 
-                {/* Mood Form */}
+               
                 <MoodForm onMoodAdded={fetchMoods} />
 
-                {/* Mood History */}
+                
                 <section className="mt-16">
                     <MoodList moods={moods} />
                 </section>
