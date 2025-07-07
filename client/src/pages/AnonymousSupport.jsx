@@ -16,9 +16,9 @@ export default function AnonymousSupport() {
             const token = localStorage.getItem('token');
             if (!token) return;
             try {
-                const res = await axios.get('http://localhost:5000/api/auth/me', {
-                    headers: { 'x-auth-token': token },
-                });
+            const res = await axios.get('https://mental-health-companion-oy12.onrender.com/api/auth/me', {
+                headers: { 'x-auth-token': token },
+            });
                 setUserId(res.data.id);
             } catch (err) {
                 console.error('Failed to fetch user');

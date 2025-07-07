@@ -9,7 +9,7 @@ export default function Dashboard() {
 
     const fetchEntries = async () => {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5000/api/selfcare', {
+        const res = await axios.get('https://mental-health-companion-oy12.onrender.com/api/selfcare', {
             headers: { 'x-auth-token': token },
         });
         setEntries(res.data);
@@ -36,9 +36,7 @@ export default function Dashboard() {
                     </p>
                 </section>
 
-
                 <SelfCareForm onDataLogged={fetchEntries} />
-
 
                 <section className="mt-16">
                     <SelfCareHistory entries={entries} />

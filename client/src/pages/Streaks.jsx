@@ -35,7 +35,8 @@ export default function Streaks() {
 
     const fetchEntries = async () => {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5000/api/selfcare', {
+        const res = await axios.get('https://mental-health-companion-oy12.onrender.com/api/selfcare', {
+
             headers: { 'x-auth-token': token }
         });
         setEntries(res.data);

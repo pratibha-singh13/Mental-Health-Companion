@@ -11,7 +11,8 @@ export default function SelfCare() {
         if (!mood.trim()) return alert("Enter how you're feeling");
         setLoading(true);
         try {
-            const res = await axios.post('http://localhost:5000/api/ai/suggest', { mood });
+            const res = await axios.post('https://mental-health-companion-oy12.onrender.com/api/ai/suggest', { mood });
+
             setSuggestion(res.data.suggestion);
         } catch (err) {
             alert('Failed to fetch suggestions');

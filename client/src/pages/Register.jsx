@@ -11,7 +11,8 @@ export default function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/register', {
+    const res = await axios.post('https://mental-health-companion-oy12.onrender.com/api/auth/register', {
+
                 ...form,
                 isAnonymous: false,
             });
