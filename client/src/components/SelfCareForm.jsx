@@ -40,7 +40,8 @@ export default function SelfCareForm({ onDataLogged }) {
         e.preventDefault();
         const token = localStorage.getItem('token');
         try {
-            await axios.post('http://localhost:5000/api/selfcare', form, {
+           await axios.post('https://mental-health-companion-oy12.onrender.com/api/selfcare', form, {
+
                 headers: { 'x-auth-token': token },
             });
             setForm({
