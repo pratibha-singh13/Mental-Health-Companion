@@ -3,13 +3,14 @@
 > A modern, secure, and user-centric MERN stack application designed to empower individuals to track their emotional well-being, build healthy self-care habits, and seek support through a safe community space.
 
 ![Project Banner](https://img.shields.io/badge/Made%20with-MERN-blueviolet?style=for-the-badge)
-![License](https://img.shields.io/github/license/pratibha-singh13/Mental-Health-Companion?style=flat-square)
-![Issues](https://img.shields.io/github/issues/pratibha-singh13/Mental-Health-Companion?style=flat-square)
+
 
 ---
 
 ## 🚀 Live Demo
-*Coming Soon* – Deployment in progress
+
+[Click here to try the Mental Health Companion](https://moodmate-mental-health-companion.netlify.app/)
+
 
 ---
 
@@ -23,7 +24,7 @@ This project was collaboratively developed by a team of four developers during a
 
 ## 🧩 Features
 
-### ✅ Mood & Self-Care Tracking
+### ✅ Mood & Self-Care Habits Tracking
 - 🎭 Daily mood check-ins with emoji-based selection
 - 🛌 Sleep, 💧 Water, 🏋️ Exercise, 🧘 Meditation, 📓 Journaling tracking
 - 📝 Optional personal reflections and notes
