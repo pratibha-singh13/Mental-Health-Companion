@@ -1,4 +1,4 @@
-# 🧠 Mental Health Companion
+#  Mental Health Companion
 
 > A modern, secure, and user-centric MERN stack application designed to empower individuals to track their emotional well-being, build healthy self-care habits, and seek support through a safe community space.
 
@@ -25,40 +25,40 @@ This project was collaboratively developed by a team of four developers during a
 ## 🧩 Features
 
 ### ✅ Mood & Self-Care Habits Tracking
-- 🎭 Daily mood check-ins with emoji-based selection
-- 🛌 Sleep, 💧 Water, 🏋️ Exercise, 🧘 Meditation, 📓 Journaling tracking
-- 📝 Optional personal reflections and notes
+-  Daily mood check-ins with emoji-based selection
+-  Sleep, Water, Exercise, Meditation, Journaling tracking
+-  Optional personal reflections and notes
 
 ### 📊 Personalized Insights Dashboard
-- 📈 Mood trends and fluctuations over time
-- 💤 Sleep and hydration visualizations
-- 🎯 Habit completion overview
-- 📉 Weekly mood and wellness streaks
+- Mood trends and fluctuations over time
+- Sleep and hydration visualizations
+- Habit completion overview
+- Weekly mood and wellness streaks
 
 ### 🧾 Self-Care History
-- 📆 Visual timeline of mood + self-care entries
-- ⌛ Friendly date formatting like “Today” and “Yesterday”
-- 🎨 Emojis and icons to enhance readability
+- Visual timeline of mood + self-care entries
+- Friendly date formatting like “Today” and “Yesterday”
+- Emojis and icons to enhance readability
 
 ### 🔒 Authentication & Authorization
-- 🔐 JWT-based secure login system
-- 🛡️ Protected routes and endpoints
-- 📤 Cloudinary image uploads with secure access
+- JWT-based secure login system
+- Protected routes and endpoints
+- Cloudinary image uploads with secure access
 
 ### 🧑‍🤝‍🧑 Anonymous Peer Support Wall
 - 📝 Share your thoughts anonymously
 - ❤️ Like and 💬 comment on posts
 - 📷 Attach images/videos to express freely
-- 🧑‍💻 Post ownership with deletion rights
+- Post ownership with deletion rights
 
 ### 📱 Progressive UI
-- 🎨 Responsive design with Tailwind CSS
-- 🌫️ Glassmorphism + dark-themed modern UI
-- 🚀 Smooth animations and transitions
+- Responsive design with Tailwind CSS
+- Glassmorphism + dark-themed modern UI
+- Smooth animations and transitions
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### 💻 Frontend
 - **React** + **Vite** (Blazing fast builds)
@@ -76,12 +76,12 @@ This project was collaboratively developed by a team of four developers during a
 
 ## ⚙️ Setup Instructions
 
-### 🔧 Prerequisites
+### Prerequisites
 - Node.js & npm
 - MongoDB URI (local or cloud)
 - Cloudinary account (for media uploads)
 
-### 📥 Installation
+### Installation
 
 1. **Clone the repository:**
    ```bash
